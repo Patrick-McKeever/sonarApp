@@ -17,7 +17,7 @@ setup(
         'pygame',
         'sox'
     ],
-    packages = ["sonar"],
+    packages = ['sonar'],
     entry_points = {
         'console_scripts': ['sonarApp=sonar.main:main']
     }
