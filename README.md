@@ -7,7 +7,7 @@ Sonar is an app designed to provide alerts once specific devices enter your wifi
 To install Sonar, clone and install the setup.py file.
 
 ```
-git clone [url] .
+git clone https://github.com/Patrick-McKeever/sonarApp.git
 sudo pip install -e sonarApp
 ```
 
