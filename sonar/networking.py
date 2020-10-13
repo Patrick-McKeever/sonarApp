@@ -77,11 +77,6 @@ def getNetworkName(routerMac):
     
     return
 
-#Returns bool value of whether user is connected to network.
-def isConnected():
-    interface = netifaces.interfaces()[1]
-    
-
 #Returns list of hostIds on network;
 def getHostsOnNetwork(surveyResults, hosts):
     macsOnNetwork = [host['mac'] for host in surveyResults]
