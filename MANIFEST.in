@@ -1,0 +1,2 @@
+include sonar/sonar.kv
+include sonar/ringtones/*.wav

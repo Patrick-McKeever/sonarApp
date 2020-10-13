@@ -1,0 +1,10 @@
+kivy
+kivymd
+scapy
+netifaces
+ipaddress
+mac-vendor-lookup
+elevate
+screeninfo
+pygame
+sox
