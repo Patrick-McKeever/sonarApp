@@ -17,7 +17,6 @@ from kivy.config import Config
 screenDimensions = get_monitors()[0]
 Config.set('graphics', 'width', screenDimensions.width)
 Config.set('graphics', 'height', screenDimensions.height)
-Config.set('kivy','window_icon','sonar.webp')
 
 
 from kivymd.app import MDApp
