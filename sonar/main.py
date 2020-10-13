@@ -79,7 +79,7 @@ class notificationSettings(MDBoxLayout):
         pass    
 
 #If a host enters/leaves the network, put its id onto notifsQ.
-#If we lock this thread, the main process halts, so we can't write to hosts.
+#If we lock this thread, the main process halts, so we can't write to initHosts.
 #Instead, we write to hostsQ while main processs periodically sets its host values
 #equal to the values of hostsQ.
 def notifsProducer(initSurveyRes, initHosts, notifsQ, hostsQ):
