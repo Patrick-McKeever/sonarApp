@@ -334,7 +334,8 @@ class sonarApp(MDApp):
                 [hostId])
             self.conn.commit()
             self.hostDialog.dismiss(force = 1)
-            
+    
+    #Callback to make "tone" checkboxes visible when user enables notifs.
     def selectNotifType(self):
         self.hostDialog.content_cls.ids['options'].opacity = 1
         self.hostDialog.update_height()   
