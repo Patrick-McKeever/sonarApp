@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'sonarApp',
-    version = '1.0.9',
+    version = '1.0.0',
     author = 'Patrick McKeever III',
     author_email = 'patrick.mckeever@protonmail.com',
     install_requires = [
