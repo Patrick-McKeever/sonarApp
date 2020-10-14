@@ -19,6 +19,12 @@ Since Sonar must run as sudo (due to Scapy), it may be necessary to install depe
 sudo pip install -r sonarApp/requirements.txt
 ```
 
+Running Sonar on Linux also requires "route", with which certain Linux distros may not ship. In this case, run:
+
+```
+sudo apt install net-tools
+```
+
 ## Usage
 
 To open Sonar, simply run the following from command line:
