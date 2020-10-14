@@ -1,12 +1,10 @@
 from scapy.all import *
 from ipaddress import ip_network
-from plyer import wifi
 from subprocess import check_output, call
 from time import sleep
 import socket
 import sys
 import netifaces
-import plyer
 import sqlite3
 import os
 
@@ -35,12 +33,22 @@ def surveyNetwork(subnetMask, times):
 #Given a surveyResult, returns router's mac addr.
 def getRouterMac(hostList):
     routerIp = netifaces.gateways()['default'][netifaces.AF_INET][0]
-    return list(filter(lambda x: x['ip'] == routerIp, hostList))[0]['mac']
+    routerObj = list(filter(
+        lambda x: x['ip'] == routerIp,
+        hostList))
+    
+    routerMac = routerObj[0]['mac']
+    
+    return routerMac
 
 #Given router's macAddr, returns network's SSID.
 def getNetworkName(routerMac):
     if sys.platform.startswith('linux'):
-        interface = netifaces.interfaces()[1]
+        interfaceRaw = subprocess.check_output(
+            "route | grep '^default' | grep -o '[^ ]*$'",
+            shell = 1).decode('utf-8')
+        interface = interfaceRaw.rstrip('\n')
+        
         fields = ['SSID', 'BSSID', 'FREQ']
         networksRaw = check_output([
                 'nmcli', '--terse',
@@ -51,8 +59,8 @@ def getNetworkName(routerMac):
         for line in networksRaw.splitlines():
             #Regex just splits the string without splitting escape characters;
             row = { field: value 
-                       for field, value in zip(fields, re.split(r'(?<!\\):', line)) 
-                  }
+                for field, value
+                in zip(fields, re.split(r'(?<!\\):', line)) }
             
             row['BSSID'] = row['BSSID'].replace('\\:', ':')
             
@@ -60,22 +68,30 @@ def getNetworkName(routerMac):
                 return row['SSID']
     
     elif sys.platform.startswith('win32'):
+        interface = check_output(
+            'for /F "tokens=4*" %%a in (\'netsh interface show interface ^| more +2\') do echo %%a %%b',
+            shell = 1).decode('utf-8')
         currentNetwork = check_output([
                 'netsh', interface,
                 'show', 'interfaces'
             ]).decode('utf-8').split('\n')
         
-        ssidLine = [ line for line in currentNetwork if 'SSID' in line and 'BSSID' not in line ]
-        
+        ssidLine = [ line 
+            for line in currentNetwork
+            if 'SSID' in line
+            and 'BSSID' not in line ]
+
         if ssidLine:
             ssidList = ssidLine[0].split(':')
             connectedSsid = ssidList[1].strip()
             return connectedSsid
         
     elif sys.platform.startswith('darwin'):
-        return check_output('/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: "/ SSID/{print $2}"').decode('utf-8')
+        return check_output(
+            '/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: "/ SSID/{print $2}"',
+            shell = 1).decode('utf-8')
     
-    return
+    return 'Unknown Network'
 
 #Returns list of hostIds on network;
 def getHostsOnNetwork(surveyResults, hosts):
@@ -84,5 +100,3 @@ def getHostsOnNetwork(surveyResults, hosts):
     return { host['id']
         for host in hosts.values()
         if host['macAddr'] in macsOnNetwork }
-
-
