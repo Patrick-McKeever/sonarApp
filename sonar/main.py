@@ -349,5 +349,3 @@ def main():
     app.notifsProducerP.terminate()
     app.notifChecker.cancel()
     exit(0)
-    
-main()
