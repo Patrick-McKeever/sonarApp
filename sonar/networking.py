@@ -64,7 +64,7 @@ def getNetworkName(routerMac):
             
             row['BSSID'] = row['BSSID'].replace('\\:', ':')
             
-            if(row['BSSID'] == routerMac.upper()):
+            if row['BSSID'] == routerMac.upper():
                 return row['SSID']
     
     elif sys.platform.startswith('win32'):
