@@ -8,16 +8,11 @@ To install Sonar, clone the repository and use pip for installation:
 
 ```
 git clone https://github.com/Patrick-McKeever/sonarApp.git
+sudo pip install -r sonarApp/requirements.txt
 sudo pip install -e sonarApp
 ```
 
 ## Dependencies
-
-Since Sonar must run as sudo (due to Scapy), it may be necessary to install dependencies as sudo:
-
-```
-sudo pip install -r sonarApp/requirements.txt
-```
 
 Running Sonar on Linux also requires "route", with which certain Linux distros may not ship. In this case, run:
 
