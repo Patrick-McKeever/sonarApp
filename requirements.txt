@@ -1,4 +1,4 @@
-kivy
+kivy[base] --pre --extra-index-url https://kivy.org/downloads/simple/
 kivymd
 scapy
 netifaces
