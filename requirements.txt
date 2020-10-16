@@ -1,4 +1,4 @@
-kivy[base] --pre --extra-index-url https://kivy.org/downloads/simple/
+kivy[base]
 kivymd
 scapy
 netifaces
@@ -8,3 +8,4 @@ elevate
 screeninfo
 pygame
 sox
+--pre --extra-index-url https://kivy.org/downloads/simple/
