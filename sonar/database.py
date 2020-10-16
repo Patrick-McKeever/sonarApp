@@ -77,7 +77,8 @@ def catalogNetwork(conn, cursor, surveyResults):
                 manufacturer = 'unknown'
             
             #Upsert.
-            cursor.execute('''INSERT OR ABORT INTO hosts (macAddr, ipAddr, manufacturer, networkId) VALUES (?, ?, ?, ?)
+            cursor.execute('''INSERT OR ABORT INTO hosts 
+                (macAddr, ipAddr, manufacturer, networkId) VALUES (?, ?, ?, ?)
                 ON CONFLICT(macAddr, networkId) DO UPDATE SET ipAddr = ?;''',
                 [host['mac'], host['ip'], manufacturer, networkId, host['ip']])
             
