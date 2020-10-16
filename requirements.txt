@@ -1,5 +1,5 @@
 kivy[base]
-kivymd
+git+git://github.com/kivymd/KivyMD#egg=kivymd
 scapy
 netifaces
 ipaddress
