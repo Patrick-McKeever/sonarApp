@@ -27,3 +27,8 @@ To open Sonar, simply run the following from command line:
 ```
 sudo sonarApp
 ```
+
+
+## Potential Issues
+
+Due to certain inconsistencies between KivyMD and later versions of Kivy, it is pertinent that Sonar be run with Kivy version 2.0.0rc3 or lower.
